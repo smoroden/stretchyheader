@@ -66,9 +66,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" clipsSubviews="YES" contentMode="scaleToFill" id="J9a-Xf-04i">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="216"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-header" translatesAutoresizingMaskIntoConstraints="NO" id="bf6-80-WHz">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="216"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA7-8l-VT5">
+                                    <rect key="frame" x="8" y="8" width="36" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.99990516901016235" green="1" blue="0.99987047910690308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="bA7-8l-VT5" firstAttribute="top" secondItem="J9a-Xf-04i" secondAttribute="top" constant="8" id="EKm-Tm-fci"/>
+                                <constraint firstItem="bf6-80-WHz" firstAttribute="top" secondItem="J9a-Xf-04i" secondAttribute="top" id="HS8-FH-vJC"/>
+                                <constraint firstItem="bf6-80-WHz" firstAttribute="leading" secondItem="J9a-Xf-04i" secondAttribute="leading" id="HlJ-f5-Ike"/>
+                                <constraint firstAttribute="bottom" secondItem="bf6-80-WHz" secondAttribute="bottom" id="Z5c-YB-hdg"/>
+                                <constraint firstItem="bA7-8l-VT5" firstAttribute="leading" secondItem="J9a-Xf-04i" secondAttribute="leading" constant="8" id="xE8-Yn-2wW"/>
+                                <constraint firstAttribute="trailing" secondItem="bf6-80-WHz" secondAttribute="trailing" id="z3u-WS-8A1"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="64" id="WCw-Qf-5nD" customClass="MasterTableViewCell" customModule="Stretchy_Headers" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="238" width="600" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
@@ -113,10 +137,17 @@
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="bA7-8l-VT5" id="Dyo-xq-VpA"/>
+                        <outlet property="headerView" destination="J9a-Xf-04i" id="nNG-JX-Qt6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bg-header" width="1242" height="825"/>
+    </resources>
 </document>

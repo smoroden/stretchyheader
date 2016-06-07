@@ -15,21 +15,66 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var managedObjectContext: NSManagedObjectContext? = nil
     var data : [NewsItem] = [NewsItem]()
 
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    var headerView2:UIView!
+    
+    let kTableHeaderHeight = 216
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-//
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MasterViewController.insertNewObject(_:)))
-//        self.navigationItem.rightBarButtonItem = addButton
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 67
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 67
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        headerView2 = tableView.tableHeaderView
+        tableView.tableHeaderView = nil
+        
+        tableView.addSubview(headerView2)
         
         setupData()
+        setupDate()
         
+        tableView.contentInset = UIEdgeInsetsMake(CGFloat(kTableHeaderHeight), 0.0, 0.0, 0.0)
+        tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        
+        updateHeaderView()
+        
+        
+
+    }
+    
+    func updateHeaderView() {
+        var headerRect = CGRect(x: CGFloat(0), y: CGFloat(-kTableHeaderHeight), width: tableView.bounds.width, height: CGFloat(kTableHeaderHeight))
+        if tableView.contentOffset.y < CGFloat(-kTableHeaderHeight) {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+        headerView2.frame = headerRect
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    func setupDate() {
+        let date = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "EEEE d"
+        
+        dateLabel.text = formatter.stringFromDate(date)
     }
     
     func setupData() {
@@ -41,6 +86,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         data.append(NewsItem(category: .Americas, headline: "Officials: FBI is tracking 100 Americans who fought alongside IS in Syria"))
         data.append(NewsItem(category: .World, headline: "South Africa in $40 billion deal for Russian nuclear reactors"))
         data.append(NewsItem(category: .Europe, headline: "'One million babies' created by EU student exchanges"))
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        updateHeaderView()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -106,6 +155,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         return cell
     }
+    
+    
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.

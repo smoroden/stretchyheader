@@ -39,8 +39,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         setupData()
         setupDate()
         
-        tableView.contentInset = UIEdgeInsetsMake(CGFloat(kTableHeaderHeight), 0.0, 0.0, 0.0)
-        tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        tableView.contentInset.top = CGFloat(kTableHeaderHeight)
+        tableView.contentOffset.y = CGFloat(-kTableHeaderHeight)
         
         updateHeaderView()
         
@@ -100,26 +100,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Dispose of any resources that can be recreated.
     }
 
-//    func insertNewObject(sender: AnyObject) {
-//        let context = self.fetchedResultsController.managedObjectContext
-//        let entity = self.fetchedResultsController.fetchRequest.entity!
-//        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
-//             
-//        // If appropriate, configure the new managed object.
-//        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-//        newManagedObject.setValue(NSDate(), forKey: "timeStamp")
-//             
-//        // Save the context.
-//        do {
-//            try context.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            //print("Unresolved error \(error), \(error.userInfo)")
-//            abort()
-//        }
-//    }
-
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -162,25 +142,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Return false if you do not want the specified item to be editable.
         return false
     }
-
-
-//    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-//        let object = self.fetchedResultsController.objectAtIndexPath(indexPath)
-//        cell.textLabel!.text = object.valueForKey("timeStamp")!.description
-//    }
-
-    
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         self.tableView.reloadData()
-     }
-     */
-    
-    
-
 
 }
 
